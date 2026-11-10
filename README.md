@@ -20,7 +20,7 @@ An example solution for three rings would look like this:
 - Move the small ring from the left pillar to the right pillar
 - All done!
 
-Solving a Tower of Hanoi puzzle very recursive, and due to this, it is possible to calculate the minimum number of moves needed to solve a puzzle as `2^n - 1`, where `n` is the number of rings. So, let's write a computer program that can solve this puzzle! You can even see a visualization of the steps along the way. The code for printing a puzzle and moving rings has been provided for you. You need to write the recursive code that executes the solution to the puzzle.
+Solving a Tower of Hanoi puzzle is very recursive, and due to this, it is possible to calculate the minimum number of moves needed to solve a puzzle as `2^n - 1`, where `n` is the number of rings. So, let's write a computer program that can solve this puzzle! You can even see a visualization of the steps along the way. The code for printing a puzzle and moving rings has been provided for you. You need to write the recursive code that executes the solution to the puzzle.
 
 ## Your Task
 
