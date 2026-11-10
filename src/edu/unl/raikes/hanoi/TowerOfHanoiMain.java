@@ -14,7 +14,7 @@ public class TowerOfHanoiMain {
      * 
      * @param myHanoi the Hanoi puzzle to solve
      */
-    public static void moveStack(HanoiStudio myHanoi, int sourcePillar, int destinationPillar, int depth) {
+    public static void moveStack(HanoiStudio myHanoi, int sourcePillar, int destinationPillar, int depth, boolean printTurns) {
         // TODO: provide a recursive, loop-free implementation of this function
     }
 
