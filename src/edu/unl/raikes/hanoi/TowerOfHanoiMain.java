@@ -36,21 +36,10 @@ public class TowerOfHanoiMain {
      * @param args this program does not accept command line arguments
      */
     public static void main(String[] args) {
-        final int RINGS_TO_SOLVE = 5;
+        final int RINGS_TO_SOLVE = 5; // Provided as an example. Remember to ask the user for this number!
         HanoiStudio myHanoi = new HanoiStudio(RINGS_TO_SOLVE);
-        System.out.println(myHanoi.toString());
 
-        solvePuzzle(myHanoi, false);
-
-        if (myHanoi.isSolved()) {
-            System.out.println("Congratulations, you solved the puzzle!");
-        } else {
-            System.out.println("Oh no, it looks like you didn't solve the puzzle!");
-        }
-        
-        System.out.println("Rings: " + myHanoi.getRingCount());
-        System.out.println("Your moves: " + myHanoi.getMoves());
-        System.out.println("Par: " + myHanoi.getPar());
+        // TODO: your code here!
     }
 
 }
