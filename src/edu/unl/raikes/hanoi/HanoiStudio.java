@@ -96,6 +96,7 @@ public class HanoiStudio {
 
     /**
      * Dynamically generates a string representative of a Hanoi puzzle with any number of rings in any position.
+     * The output of this function can be printed directly to the console.
     */
     @Override
     public String toString() {

@@ -1,50 +1,133 @@
 # Tower of Hanoi Solver
 
-Before a choral rehearsal or performance, vocalists practice vocal "warm-ups". These warm-ups stretch the vocalists' vocal cords (thus preventing injury). They also help to practice clear diction and to regulate breathing. Often, these warm-ups are silly and irritatingly catchy.
+Invented by French mathematician Édouard Lucask, the Tower of Hanoi is a math puzzle consisting of rings of increasing diameter stacked on one of three large pillars, with the objective being to transfer a stack of rings from the first pillar to the last. There are, of course, some rules to make this challenging.
+- A ring can only be moved if it is at the top of its pillar
+- A ring can only be placed onto an empty pillar, or a ring smaller than it
 
-One such warm-up (that \*still\* gets stuck in my head frequently, 15+ years after learning it) deals with scales. The warm-up starts with just the first note, "DO", then pauses, then proceeds "DO RE DO", then pauses, then proceeds "DO RE MI RE DO", etc. After each pause, the song includes one additional note, playing the sequence forward and then backward. We will call these forward-and-backward sequences "phrases". The final phrase of the warm up is "DO RE MI FA SO LA TI LA SO FA MI RE DO". Very catchy. Check it out [in this video by YouTuber Janelle Doak](https://youtu.be/WTckI65BgHQ) (the relevant portion of the video is the first 40 seconds).
+Lucask purported that the puzzle came from an ancient temple where monks would work on a Tower of Hanoi puzzle made of sixty four golden rings, and that the world would end when the puzzle is solved. The process for solving this puzzle is actually quite straightforward:
+- Since we can only move the top ring of a pillar, first move all but the last (biggest) ring out of the way
+- Now that the ring is free, move the biggest ring into place
+- Finally, move the displaced stack onto the new location of the biggest ring
 
-The format of this choral warm-up is very recursive. So, let's write a computer program that can play this and other similar choral warm-ups! You can even save the songs your code creates to listen to later. The code for playing and saving sound has been provided for you. You need to write the recursive code that generates the songs.
+An example solution for three rings would look like this:
+- Start with the rings on the left pillar
+- Move the small ring from the left pillar to the right pillar
+- Move the medium ring from the left pillar to the middle pillar
+- Move the small ring from the right pillar to the middle pillar
+- Move the large ring from the left pillar to the right pillar
+- Move the small ring from the middle pillar to the left pillar
+- Move the medium ring from the middle pillar to the right pillar
+- Move the small ring from the left pillar to the right pillar
+- All done!
+
+Solving a Tower of Hanoi puzzle very recursive, and due to this, it is possible to calculate the minimum number of moves needed to solve a puzzle as `2^n - 1`, where `n` is the number of rings. So, let's write a computer program that can solve this puzzle! You can even see a visualization of the steps along the way. The code for printing a puzzle and moving rings has been provided for you. You need to write the recursive code that executes the solution to the puzzle.
 
 ## Your Task
 
 The number of lines of code required to complete this assignment is quite minimal, but each line of code has great impact. You may not write any loops outside of your unit tests. You will need to write three functions:
 
--   **A recursive function that plays one phrase, (a sequence of notes played forward, then backward).** For example, if the input of the function was the notes `[DO, RE, MI]`, the function should play DO RE MI RE DO.
--   **A recursive function that plays phrases of increasing length.** For example, if the input of the function was `[DO, RE, MI]`, the function should play DO REST DO RE DO REST DO RE MI RE DO REST. We will call this sequence of phrases a "song".
--   **A main method that writes a song from a unique sequence of notes and rests.** Play around with different sequences of notes as inputs to your song-making function and find one that represents your taste in music. Your sequence should be 10 notes or longer. After your song plays, save your masterpiece using the `MidiStudio.saveMasterpiece(String filename)` function (your filename should end with ".wav"). The `MidiStudio` class already records each note as it's played (you're welcome), so you don't need to do anything special to keep track of the notes that have been played in order to make the recording.
--   **Unit tests for your recursive functions.** Unit testing can be difficult for output-heavy applications. As such, you have been provided one sample unit test. Notice that the test disables the audio from playing and that MidiStudio is closed in the "teardown" portion of the test.
-
-### Note About Array-Based Recursion
-
-Recursing on arrays is very common. There are several techniques for keeping track of which part of the array is "in scope" at a given level of the recursion. The simplest technique is called "array slicing". Basically, "array slicing" is to arrays what "substring" is to Strings. You can "slice" an array to trim off indices at either the beginning or the end of the array (or both). In Java, slicing can be accomplished using the `Arrays.copyOfRange(array, inclusiveStartingIndex, exclusiveEndingIndex)` function. You can provide these array slices to subsequent recursive calls. If done correctly, the length of the Note array accepted by the function will change at each recursion level.
+-   **A recursive function that moves a stack of rings from one pillar to another.** This function should move all but the biggest ring out of the way, move the biggest ring into place, then move the stack of rings back onto the biggest ring. The `depth` parameter will be useful to indicate how deep of a stack to move. This function should, if enabled via the `doPrint` parameter, also print the puzzle after every move to the console by using HanoiStudio's `toString()` function.
+-   **A function that calls your recursive function and passes in any necessary context.** For example, given a Tower of Hanoi puzzle, this function should find out what pillar needs to go where, and call your recursive function with appropriate arguments. When solving your Tower of Hanoi puzzle, you should do so in the minimum possible number of moves
+-   **A main method that asks the user for how many rings to solve for, then solves that puzzle** Ask the user for how many rings they would like to put on their Tower of Hanoi puzzle, then call yoru solver function to solve the puzzle! After doing so, check to see if the puzzle was solved in the minimum number of moves. (Hint: you can check how many moves have been executed with HanoiStudio's `getMoves()` function)
+-   **Unit tests for your recursive functions.** Unit testing can be difficult for output-heavy applications. As such, you have been provided one sample unit test. Notice that the test disables printing uses HanoiStudio's `getPillar()` function to get the information of the rings in a pillar of the puzzle.
 
 ### Restrictions
 
 In completing this assignment, you are not allowed to:
 
-- Use loops of any kind (recursion and the `Arrays.copyOfRange` function is all you need to complete the assignment)
+- Use loops of any kind (recursion is all you need to complete the assignment)
 - Change the method signature (arguments or return type) of any methods
 - Add any new methods
 - Add any global variables
 
+### Moving a Ring
+HanoiStudio provides a function to move rings in a Tower of Hanoi puzzle:
+```java
+public boolean moveRing(int sourcePillar, int destinationPillar, int ringNumber) throws HanoiException
+```
+This function accepts integers for source and destination pillars, as well as which ring to move from the source to the destination. This function throws a `HanoiException` if something goes wrong, for example if you try to:
+- Move a ring onto its own pillar
+- Move a ring that is not on the top of its pillar
+- Move a ring from an empty pillar
+- Move a ring onto a ring that is smaller than it
+
+If everything is good, it will move the ring from the source to the destination, and will return `true` to indicate a move was successful
+
+These exceptions must be caught in your recursive function.
+
 ## Examples
 
-Here is an example of program output for a traditional scale:
+Here is an example of program output for a solution for one ring: <!-- and in the darkness bind them -->
+```
+Welcome to the Tower of Hanoi solver!
+How many rings would you like to solve for? 1
+    |     |     | 
+   [1]    |     | 
+----┴-----┴-----┴----
+    |     |     | 
+    |     |    [1]
+----┴-----┴-----┴----
 
--   Notes: `DO, RE, MI, FA, SO, LA, TI`
--   Recording: [here](exampleMasterpieces/scale.wav)
+I was able to solve the puzzle!
+Rings: 1
+Moves: 1
+Par: 1
+Solved in par moves!
+```
+Here is an example of program output for a solution for three rings:
+```
+Welcome to the Tower of Hanoi solver!
+How many rings would you like to solve for? 3
+      |         |         |   
+     [1]        |         |   
+    [=2=]       |         |   
+   [==3==]      |         |   
+------┴---------┴---------┴------
+      |         |         |   
+      |         |         |   
+    [=2=]       |         |   
+   [==3==]      |        [1]  
+------┴---------┴---------┴------
 
-Here is another example of a non-scale melody:
+      |         |         |   
+      |         |         |   
+      |         |         |   
+   [==3==]    [=2=]      [1]  
+------┴---------┴---------┴------
+      |         |         |   
+      |         |         |   
+      |        [1]        |   
+   [==3==]    [=2=]       |   
+------┴---------┴---------┴------
 
--   Notes: `TI SO MI REST LA DO FA`
--   Recording: [here](exampleMasterpieces/masterpiece.wav)
+      |         |         |   
+      |         |         |   
+      |        [1]        |   
+      |       [=2=]    [==3==]
+------┴---------┴---------┴------
+      |         |         |   
+      |         |         |   
+      |         |         |   
+     [1]      [=2=]    [==3==]
+------┴---------┴---------┴------
 
-Given these same inputs, your code should produce the same songs.
+      |         |         |   
+      |         |         |   
+      |         |       [=2=] 
+     [1]        |      [==3==]
+------┴---------┴---------┴------
+      |         |         |   
+      |         |        [1]  
+      |         |       [=2=] 
+      |         |      [==3==]
+------┴---------┴---------┴------
 
-## Extra Credit
-
-Use recursion and MidiStudio to do something awesome and creative for extra credit. Visit TA Hours and demo it for any TA. (Extra credit will not be graded alongside the rest of your code.)
+I was able to solve the puzzle!
+Rings: 3
+Moves: 7
+Par: 7
+Solved in par moves!
+```
 
 ## Homework 11 Outcomes
 
