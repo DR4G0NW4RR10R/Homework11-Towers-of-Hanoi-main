@@ -1,8 +1,8 @@
 # Tower of Hanoi Solver
 
-Invented by French mathematician Édouard Lucask, the Tower of Hanoi is a math puzzle consisting of rings of increasing diameter stacked on one of three large pillars, with the objective being to transfer a stack of rings from the first pillar to the last. There are, of course, some rules to make this challenging.
+Invented by French mathematician Édouard Lucask, the Tower of Hanoi is a math puzzle consisting of rings of decreasing diameter stacked on one of three large pillars, with the objective being to transfer a stack of rings from the first pillar to the last. There are, of course, some rules to make this challenging.
 - A ring can only be moved if it is at the top of its pillar
-- A ring can only be placed onto an empty pillar, or a ring smaller than it
+- A ring can only be placed onto an empty pillar, or a ring larger than it
 
 Lucask purported that the puzzle came from an ancient temple where monks would work on a Tower of Hanoi puzzle made of sixty four golden rings, and that the world would end when the puzzle is solved. The process for solving this puzzle is actually quite straightforward:
 - Since we can only move the top ring of a pillar, first move all but the last (biggest) ring out of the way
