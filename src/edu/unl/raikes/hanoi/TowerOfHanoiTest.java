@@ -17,7 +17,7 @@ public class TowerOfHanoiTest {
         expected.add(2);
 
         // execute
-        TowerOfHanoiMain.moveStack(testPuzzle, 0, 1, 2);
+        TowerOfHanoiMain.moveStack(testPuzzle, 0, 1, 2, 2, false);
         ArrayList<Integer> actual = testPuzzle.getPillar(1);
 
         // test

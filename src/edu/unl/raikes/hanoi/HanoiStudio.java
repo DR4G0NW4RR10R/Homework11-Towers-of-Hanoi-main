@@ -67,7 +67,7 @@ public class HanoiStudio {
         
         //check if the ring is placable in its new location
         if (this.pillars.get(destinationPillar).size() != 0) {
-            if (this.pillars.get(destinationPillar).get(0) >= ringToMove) {
+            if (this.pillars.get(destinationPillar).get(0) <= ringToMove) {
                 throw new HanoiException(
                     "Cannot place ring " + ringToMove + " on pillar "
                     + destinationPillar + " because that pillar has a smaller ring on top");

@@ -14,7 +14,7 @@ public class TowerOfHanoiMain {
      * 
      * @param myHanoi the Hanoi puzzle to solve
      */
-    public static void moveStack(HanoiStudio myHanoi, int srcPillar, int destPillar, int depth, boolean printTurns) {
+    public static void moveStack(HanoiStudio puzzle, int source, int dest, int depth, int ring, boolean doPrint) {
         // TODO: provide a recursive, loop-free implementation of this function
     }
 
@@ -38,6 +38,7 @@ public class TowerOfHanoiMain {
     public static void main(String[] args) {
         final int RINGS_TO_SOLVE = 5;
         HanoiStudio myHanoi = new HanoiStudio(RINGS_TO_SOLVE);
+        System.out.println(myHanoi.toString());
 
         solvePuzzle(myHanoi, false);
 
